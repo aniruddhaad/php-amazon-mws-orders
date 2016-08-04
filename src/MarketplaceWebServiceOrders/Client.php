@@ -787,6 +787,9 @@ class MarketplaceWebServiceOrders_Client implements MarketplaceWebServiceOrders_
     }
 
     private function _urlencode($value) {
+        if(is_object($value) && strcmp(get_class($value),'DateTime')==0){
+			$value=$this->getFormattedTimestamp($value);
+		}
         return str_replace('%7E', '~', rawurlencode($value));
     }
 
